@@ -6,6 +6,6 @@ package com.salajim.musab.recipesfinder;
 
 public class Constants {
     public static final String ApiKey =  BuildConfig.ApiKey;
-    public static final String BaseUrl = "http://api.yummly.com/v1/api/recipes?";
+    public static final String BaseUrl = "http://api.yummly.com/v1/api/recipes?_app_id=61ee9d22";
     public static final String Api_Key_Holder = "apiKey";
 }
