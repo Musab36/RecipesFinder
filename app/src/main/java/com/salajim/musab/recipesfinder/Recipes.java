@@ -1,18 +1,22 @@
 package com.salajim.musab.recipesfinder;
 
+import org.parceler.Parcel;
+
 /**
  * Created by Musab on 1/1/2018.
  */
-
+@Parcel
 public class Recipes {
-    private String smallImageUrls;
-    private String recipeName;
-    private String rating;
+    String smallImageUrls;
+    String recipeName;
+    //String rating;
 
-    public Recipes(String smallImageUrls, String recipeName, String rating) {
+    public Recipes() {}
+
+    public Recipes(String smallImageUrls, String recipeName) {
         this.smallImageUrls = smallImageUrls;
         this.recipeName = recipeName;
-        this.rating = rating;
+        //this.rating = rating;
     }
 
     public String getSmallImageUrls() {
@@ -23,7 +27,9 @@ public class Recipes {
         return recipeName;
     }
 
+    /*
     public String getRating() {
         return rating;
     }
+    */
 }

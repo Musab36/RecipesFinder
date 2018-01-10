@@ -1,5 +1,7 @@
 package com.salajim.musab.recipesfinder;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,12 +21,12 @@ import okhttp3.Response;
  */
 
 public class RecipesService {
-    public static void findRecipes(String matches, Callback callback) {
+    public static void findRecipes(String results, Callback callback) {
 
         OkHttpClient client = new OkHttpClient.Builder().build();
 
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.BaseUrl).newBuilder();
-        urlBuilder.addQueryParameter(Constants.Api_Key_Holder, Constants.ApiKey);
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.RECIPES_BASE_URL).newBuilder();
+        //urlBuilder.addQueryParameter(Constants.ApiKey, matches);
 
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder()
@@ -33,6 +35,8 @@ public class RecipesService {
 
         Call call = client.newCall(request);
         call.enqueue(callback);
+
+        Log.v("url", url);
     }
 
     public ArrayList<Recipes> processResults(Response response) {
@@ -42,14 +46,14 @@ public class RecipesService {
             String jsonData = response.body().string();
             if(response.isSuccessful()) {
                 JSONObject recipesJSON = new JSONObject(jsonData);
-                JSONArray matchesJSON = recipesJSON.getJSONArray("matches");
+                JSONArray matchesJSON = recipesJSON.getJSONArray("results");
                 for(int i = 0; i < matchesJSON.length(); i ++) {
                     JSONObject recipeJSON = matchesJSON.getJSONObject(i);
-                    String smallImageUrls = recipeJSON.getString("smallImageUrl");
-                    String recipeName = recipeJSON.getString("recipeName");
-                    String rating = recipeJSON.getString("rating");
+                    String smallImageUrls = recipeJSON.getString("thumbnail");
+                    String recipeName = recipeJSON.getString("title");
+                    //String rating = recipeJSON.getString("href");
 
-                    Recipes recipe = new Recipes(smallImageUrls, recipeName, rating);
+                    Recipes recipe = new Recipes(smallImageUrls, recipeName);
                     recipes.add(recipe);
                 }
             }

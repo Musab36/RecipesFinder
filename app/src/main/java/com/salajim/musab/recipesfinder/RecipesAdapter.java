@@ -51,7 +51,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
     public class RecipesViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.recipesImageView) ImageView mRecipesImageView;
         @Bind(R.id.recipesName) TextView mRecipesNameTextView;
-        @Bind(R.id.rating) TextView mRating;
+        //@Bind(R.id.rating) TextView mRating;
 
         private Context mContext;
 
@@ -69,7 +69,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
                     .into(mRecipesImageView);
 
             mRecipesNameTextView.setText(recipes.getRecipeName());
-            mRating.setText(recipes.getRating());
+            //mRating.setText(recipes.getRating());
         }
     }
 
