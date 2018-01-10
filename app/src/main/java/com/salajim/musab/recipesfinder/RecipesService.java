@@ -52,8 +52,10 @@ public class RecipesService {
                     String smallImageUrls = recipeJSON.getString("thumbnail");
                     String recipeName = recipeJSON.getString("title");
                     //String rating = recipeJSON.getString("href");
+                    String ingredients = recipeJSON.getString("ingredients");
+                    String href = recipeJSON.getString("href");
 
-                    Recipes recipe = new Recipes(smallImageUrls, recipeName);
+                    Recipes recipe = new Recipes(smallImageUrls, recipeName, ingredients, href);
                     recipes.add(recipe);
                 }
             }

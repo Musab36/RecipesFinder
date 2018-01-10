@@ -1,6 +1,7 @@
 package com.salajim.musab.recipesfinder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -48,7 +51,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
         return mRecipes.size();
     }
 
-    public class RecipesViewHolder extends RecyclerView.ViewHolder {
+    public class RecipesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @Bind(R.id.recipesImageView) ImageView mRecipesImageView;
         @Bind(R.id.recipesName) TextView mRecipesNameTextView;
         //@Bind(R.id.rating) TextView mRating;
@@ -59,6 +62,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            itemView.setOnClickListener(this);
         }
 
         public void bindRecipes(Recipes recipes) {
@@ -70,6 +74,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.RecipesV
 
             mRecipesNameTextView.setText(recipes.getRecipeName());
             //mRating.setText(recipes.getRating());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPostion = getLayoutPosition();
+            Intent intent = new Intent(mContext, DetailActivity.class);
+            intent.putExtra("position", itemPostion);
+            intent.putExtra("recipes", Parcels.wrap(mRecipes));
+            mContext.startActivity(intent);
         }
     }
 

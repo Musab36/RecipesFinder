@@ -23,6 +23,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.salajim.musab.recipesfinder.MainActivity" />
         </activity>
+        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>
